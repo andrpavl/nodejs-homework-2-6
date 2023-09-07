@@ -1,4 +1,4 @@
-FROM node 
+FROM node:18.16.0
 
 WORKDIR /nodejs-homework-2-6
 
