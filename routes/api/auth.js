@@ -4,7 +4,7 @@ const ctrl = require("../../controllers/auth");
 
 const { validateBody, authenticate, upload } = require("../../middlewares");
 
-const { registerLoginSchema } = require("../../models/user");
+const { registerLoginSchema, emailSchema } = require("../../models/user");
 
 const router = express.Router();
 
@@ -26,5 +26,9 @@ router.patch(
 );
 
 router.patch("/avatars", authenticate, upload.single("avatar"), ctrl.updateAvatar);
+
+router.get("/verify/:verificationToken", ctrl.verifyEmail);
+
+router.post("/verify", validateBody(emailSchema), ctrl.resendVerifyEmail)
 
 module.exports = router;
